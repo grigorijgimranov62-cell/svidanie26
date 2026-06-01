@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Приглашение 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe6f0 0%, #ffb7c5 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(4px);
+            border-radius: 48px;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px 24px 40px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(255, 80, 120, 0.3);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.97); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .hearts {
+            font-size: 56px;
+            margin-bottom: 12px;
+            letter-spacing: 8px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #c43a6b;
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #c43a6b;
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            position: relative;
+            min-height: 80px;
+        }
+
+        .btn {
+            border: none;
+            font-size: 26px;
+            font-weight: bold;
+            padding: 16px 40px;
+            border-radius: 60px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: transform 0.05s linear;
+            touch-action: manipulation;
+        }
+
+        .btn-yes {
+            background: #ff80a5;
+            color: white;
+            box-shadow: 0 5px 0 #b43b5e;
+        }
+
+        .btn-yes:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #b43b5e;
+        }
+
+        .btn-no {
+            background: #d4d4d4;
+            color: #a55b6e;
+            box-shadow: 0 5px 0 #b0a0a5;
+            position: relative;
+            transition: all 0.1s ease;
+        }
+
+        .picker-area {
+            background: #fff5f7;
+            border-radius: 40px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .picker-row {
+            margin: 20px 0;
+        }
+
+        .picker-row label {
+            display: block;
+            font-size: 20px;
+            font-weight: 600;
+            color: #b23b5e;
+            margin-bottom: 10px;
+        }
+
+        input, select {
+            font-size: 20px;
+            padding: 16px 20px;
+            border-radius: 50px;
+            border: 2px solid #ffb7c5;
+            background: white;
+            font-family: inherit;
+            width: 90%;
+            max-width: 280px;
+            text-align: center;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input:focus, select:focus {
+            border-color: #ff6699;
+            box-shadow: 0 0 0 3px rgba(255, 102, 153, 0.2);
+        }
+
+        .btn-primary {
+            background: #ff80a5;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 16px 35px;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 300px;
+            box-shadow: 0 5px 0 #b43b5e;
+            transition: 0.05s linear;
+        }
+
+        .btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #b43b5e;
+        }
+
+        .result-card {
+            background: #fff2f5;
+            border-radius: 40px;
+            padding: 25px;
+            margin: 15px 0;
+        }
+
+        .result-text {
+            background: #ffe0e8;
+            border-radius: 50px;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 22px;
+            font-weight: 600;
+            color: #c43a6b;
+            word-break: break-word;
+        }
+
+        .btn-copy {
+            background: #ff6699;
+            color: white;
+            font-size: 22px;
+            padding: 16px 25px;
+            border: none;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            max-width: 280px;
+            margin: 10px 0;
+        }
+
+        .btn-secondary {
+            background: #ff99bb;
+            color: white;
+            font-size: 18px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .link-btn {
+            background: none;
+            border: none;
+            color: #c43a6b;
+            font-size: 18px;
+            text-decoration: underline;
+            padding: 12px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .big-heart {
+            font-size: 65px;
+            animation: pulse 1.2s infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <!-- СТРАНИЦА 1: Вопрос -->
+    <div id="page1" class="page active">
+        <div class="hearts">❤️ 💖 ❤️</div>
+        <h1>Ты согласна пойти со мной на свидание?</h1>
+        <div class="button-group">
+            <button class="btn btn-yes" id="yesBtn">💘 ДА 💘</button>
+            <button class="btn btn-no" id="noBtn">😅 НЕТ</button>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА 2: Выбор даты и времени -->
+    <div id="page2" class="page">
+        <div class="hearts">🌸 📅 🌸</div>
+        <h2>Выбери день и время</h2>
+        <div class="picker-area">
+            <div class="picker-row">
+                <label>📆 ДАТА</label>
+                <input type="date" id="datePicker">
+            </div>
+            <div class="picker-row">
+                <label>⏰ ВРЕМЯ</label>
+                <select id="timePicker">
+                    <option value="10:00">10:00</option>
+                    <option value="11:30">11:30</option>
+                    <option value="13:00">13:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="17:30">17:30</option>
+                    <option value="19:00" selected>19:00 ✨</option>
+                    <option value="20:30">20:30</option>
+                </select>
+            </div>
+            <button class="btn-primary" id="submitBtn">✨ Назначить встречу ✨</button>
+        </div>
+        <button class="link-btn" id="backBtn">← Назад</button>
+    </div>
+
+    <!-- СТРАНИЦА 3: Результат и копирование -->
+    <div id="page3" class="page">
+        <div class="big-heart">💖💌💖</div>
+        <h2>Ура! Жду с нетерпением!</h2>
+        <div class="result-card">
+            <div class="result-text" id="resultText"></div>
+            <button class="btn-copy" id="copyBtn">📋 Скопировать дату</button>
+            <div class="note" style="color:#a85a74; margin-top:12px; font-size:14px;">Нажми → вставь в чат со мной 💕</div>
+        </div>
+        <button class="btn-secondary" id="resetBtn">🏠 Начать заново</button>
+    </div>
+</div>
+
+<script>
+    // Убегающая кнопка "НЕТ"
+    const noBtn = document.getElementById('noBtn');
+    let noBtnEnabled = true;
+    
+    function makeNoBtnEscape() {
+        if (!noBtnEnabled) return;
+        const parent = noBtn.parentElement;
+        if (!parent) return;
+        const parentRect = parent.getBoundingClientRect();
+        const btnRect = noBtn.getBoundingClientRect();
+        
+        const maxX = Math.max(20, parentRect.width - btnRect.width - 20);
+        const maxY = Math.max(20, parentRect.height - btnRect.height - 20);
+        
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+        
+        noBtn.style.position = 'relative';
+        noBtn.style.left = randomX + 'px';
+        noBtn.style.top = randomY + 'px';
+    }
+    
+    function resetNoBtnPosition() {
+        if (noBtn) {
+            noBtn.style.position = '';
+            noBtn.style.left = '';
+            noBtn.style.top = '';
+        }
+    }
+    
+    if (noBtn) {
+        noBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            makeNoBtnEscape();
+        });
+        noBtn.addEventListener('mouseenter', makeNoBtnEscape);
+        noBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            makeNoBtnEscape();
+        });
+    }
+    
+    // Переключение страниц
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+    const page3 = document.getElementById('page3');
+    
+    function showPage(pageNum) {
+        page1.classList.remove('active');
+        page2.classList.remove('active');
+        page3.classList.remove('active');
+        
+        if (pageNum === 1) {
+            page1.classList.add('active');
+            noBtnEnabled = true;
+            resetNoBtnPosition();
+        }
+        if (pageNum === 2) {
+            page2.classList.add('active');
+            noBtnEnabled = false;
+        }
+        if (pageNum === 3) {
+            page3.classList.add('active');
+            noBtnEnabled = false;
+        }
+    }
+    
+    // Установка минимальной даты
+    const datePicker = document.getElementById('datePicker');
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    datePicker.min = `${yyyy}-${mm}-${dd}`;
+    datePicker.value = `${yyyy}-${mm}-${dd}`;
+    
+    function formatDate(dateStr) {
+        if (!dateStr) return "сегодня";
+        const [year, month, day] = dateStr.split('-');
+        const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+        return `${parseInt(day)} ${months[parseInt(month) - 1]} ${year}`;
+    }
+    
+    let savedTime = '';
+    let savedFormatted = '';
+    
+    document.getElementById('yesBtn').addEventListener('click', () => showPage(2));
+    document.getElementById('backBtn').addEventListener('click', () => showPage(1));
+    document.getElementById('resetBtn').addEventListener('click', () => showPage(1));
+    
+    document.getElementById('submitBtn').addEventListener('click', function() {
+        const chosenDate = datePicker.value;
+        const chosenTime = document.getElementById('timePicker').value;
+        const formatted = formatDate(chosenDate);
+        
+        savedTime = chosenTime;
+        savedFormatted = formatted;
+        
+        document.getElementById('resultText').innerHTML = `Встречаемся в ${chosenTime}, ${formatted} ❤️`;
+        showPage(3);
+    });
+    
+    document.getElementById('copyBtn').addEventListener('click', async function() {
+        const textToCopy = `💕 Встречаемся на свидание ${savedTime}, ${savedFormatted} 💕`;
+        
+        try {
+            await navigator.clipboard.writeText(textToCopy);
+            alert('✅ Дата скопирована!\n\nТеперь открой чат со мной и вставь туда текст');
+        } catch (err) {
+            alert(`Скопируй вручную:\n\n${textToCopy}`);
+        }
+    });
+    
+    // Эффект нажатия для мобильных
+    const allButtons = document.querySelectorAll('button');
+    allButtons.forEach(btn => {
+        btn.addEventListener('touchstart', function() {
+            this.style.opacity = '0.7';
+        });
+        btn.addEventListener('touchend', function() {
+            this.style.opacity = '1';
+        });
+    });
+</script>
+</body>
+</html>
